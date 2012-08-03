@@ -1,0 +1,7 @@
+{
+	"require": {
+		"symfony/process": "*",
+		"symfony/event-dispatcher": "*",
+		"gerkirill/parallel-processing": "*"
+	}
+}
