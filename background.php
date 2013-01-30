@@ -7,8 +7,28 @@ use \Symfony\Component\EventDispatcher\EventDispatcher;
 use \Example\FetcherTask;
 
 require_once(__DIR__.'/vendor/autoload.php');
+// designed for the rare cases when you have some foreground job, which occasionally
+// may outsource some work to the parallel processes, running in background. Nice for legacy
+// code to leverage the power of parallel processing with minimum changes required.
+// Example: code which imports a large set of object (let's say ads) from CSV file into database
+// and some of the CSV records contain image URLs, related to the ad. For such records - we need
+// to grab the images by the URL and store them locally. In this case we could left CSV processing
+// code as is, while perform image fetching in the background.
 
+/*
+$taskPool = new BackgroundTaskPool;
+$taskPool->setProcessManager($pm);
+$taskPool->setProcessFactory($pf); // could $pf be a callable ?
+$taskPool->setConcurrencyLimit(2); // execute at most 2 processes at once
 
+// define handlers somehow - callable ?
+
+$taskPool->addTask($task1);
+$taskPool->addTask($task2);
+$taskPool->addTask($task3);
+
+$taskPool->execute(2); //or pass concurrency limit here ?
+*/
 $urls = array('http://twitter.com', 'http://php.net', 'http://github.com');
 $processManager = new ProcessManager;
 

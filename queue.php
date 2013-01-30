@@ -7,6 +7,22 @@ use \Example\FetcherTask;
 
 require_once(__DIR__.'/vendor/autoload.php');
 
+// TODO: rename this to pool (task pool)
+// all the task are known at the start, but we can't execute them all at once - 
+// means we should limit the number of processes running at the same time
+
+/*
+$taskPool = new TaskPool;
+$taskPool->setProcessManager($pm);
+$taskPool->setProcessFactory($pf); // could $pf be a callable ?
+$taskPool->setConcurrencyLimit(2); // execute at most 2 processes at once
+
+$taskPool->addTask($task1);
+$taskPool->addTask($task2);
+$taskPool->addTask($task3);
+
+$taskPool->execute(2); //or pass concurrency limit here ?
+*/
 $urls = array('http://twitter.com', 'http://php.net', 'http://github.com');
 $processLimit = 2;
 $processManager = new ProcessManager;
